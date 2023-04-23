@@ -18,7 +18,7 @@ jobs:
         id: build
         uses: redhat-actions/buildah-build@v2
         with:
-          image: valheim-container
+          image: rustds-container
           containerfiles: ./Containerfile
           tags: ${{ github.sha }} latest
       
