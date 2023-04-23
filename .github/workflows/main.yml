@@ -1,0 +1,37 @@
+name: Build and Push Container Image
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '23 5 * * 2'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Buildah Build
+        id: build
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: valheim-container
+          containerfiles: ./Containerfile
+          tags: ${{ github.sha }} latest
+      
+      - name: Podman Login
+        uses: redhat-actions/podman-login@v1
+        with:
+          registry: ghcr.io/emar10
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Push to GHCR
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build.outputs.image }}
+          tags: ${{ steps.build.outputs.tags }}
+          registry: ghcr.io/emar10
