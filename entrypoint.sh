@@ -6,7 +6,7 @@ echo Installing/Updating Rust Dedicated Server...
 steamcmd +@ShutdownOnFailedCommand 1 \
          +force_install_dir /gamedata \
          +login anonymous \
-         +app_update 258550 validate \
+         +app_update 258550 \
          +exit
 
 echo Launching server...
