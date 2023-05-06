@@ -31,6 +31,7 @@ base.
 | `RUSTDS_RCON_WEB` | Whether to use the newer WebSocket-based RCON. | `1` |
 | `RUSTDS_APP_PORT` | Port used for the Rust+ app. | `28082` |
 | `ENABLE_EAC` | Whether to enable Easy AntiCheat (disable for Linux clients) | `1` |
+| `INSTALL_UMOD` | Optionally install uMod for server plugins. | `0` |
 
 ### Ports
 

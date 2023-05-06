@@ -6,8 +6,16 @@ echo Installing/Updating Rust Dedicated Server...
 steamcmd +@ShutdownOnFailedCommand 1 \
          +force_install_dir /gamedata \
          +login anonymous \
-         +app_update 258550 \
+         +app_update 258550 validate \
          +exit
+
+if [ "$INSTALL_UMOD" -eq "1" ]; then
+    echo Installing uMod...
+    curl -L https://github.com/OxideMod/Oxide.Rust/releases/latest/download/Oxide.Rust-linux.zip -o /Oxide.zip
+    pushd /gamedata
+    unzip -o /Oxide.zip
+    popd
+fi
 
 echo Launching server...
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/gamedata/RustDedicated_Data/Plugins/x86_64:/gamedata/RustDedicated_Data/Plugins

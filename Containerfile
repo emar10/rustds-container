@@ -24,12 +24,18 @@ ENV RUSTDS_RCON_PASSWORD="youshouldchangethis"
 ENV RUSTDS_RCON_WEB="1"
 ENV RUSTDS_APP_PORT="28082"
 ENV ENABLE_EAC="1"
+ENV INSTALL_UMOD="0"
 
 # Ports
 EXPOSE ${RUSTDS_SERVER_PORT}/udp
 EXPOSE ${RUSTDS_SERVER_QUERYPORT}/tcp
 EXPOSE ${RUSTDS_RCON_PORT}/tcp
 EXPOSE ${RUSTDS_APP_PORT}/tcp
+
+# Install curl
+RUN apt-get update; \
+    apt-get install -y curl unzip; \
+    rm -rf /var/lib/apt/lists/*
 
 # Copy Entrypoint Script
 ADD entrypoint.sh /entrypoint.sh
